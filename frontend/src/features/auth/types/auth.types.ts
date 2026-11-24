@@ -1,0 +1,22 @@
+/** Mismos nombres de campo que el schema UserPublic del backend. */
+export interface Usuario {
+  id: number;
+  username: string;
+  full_name: string;
+  email: string;
+  role: "user" | "admin";
+  disabled: boolean;
+  created_at: string;
+}
+
+export interface LoginCredentials {
+  username: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  username: string;
+  full_name: string;
+  email: string;
+  password: string;
+}
