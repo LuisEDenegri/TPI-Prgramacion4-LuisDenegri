@@ -8,6 +8,8 @@ categorías, productos, stock, pedidos y usuarios desde un panel.
 
 **Repositorio:** https://github.com/LuisEDenegri/TPI-Prgramacion4-LuisDenegri
 
+**Video de demostración:** _(pendiente: pegar acá el link público)_
+
 Son dos proyectos independientes que se comunican por HTTP:
 
 | | Carpeta | Stack |
