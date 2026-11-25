@@ -1,0 +1,14 @@
+# paquetes que pueden correr su script de instalacion (bajan un binario nativo).
+# pnpm 10 lee onlyBuiltDependencies; desde pnpm 11 es allowBuilds. Sin esto,
+# las versiones nuevas de pnpm cortan el install con ERR_PNPM_IGNORED_BUILDS.
+
+# pnpm 9 no acepta este archivo sin la lista de paquetes (aca es uno solo)
+packages:
+  - "."
+onlyBuiltDependencies:
+  - "@tailwindcss/oxide"
+  - esbuild
+
+allowBuilds:
+  "@tailwindcss/oxide": true
+  esbuild: true

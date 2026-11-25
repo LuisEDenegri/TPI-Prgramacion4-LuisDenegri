@@ -21,3 +21,6 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Capturas que deja frontend/check_ui.mjs
+capturas/

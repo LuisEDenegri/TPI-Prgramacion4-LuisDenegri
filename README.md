@@ -8,7 +8,7 @@ categorías, productos, stock, pedidos y usuarios desde un panel.
 
 **Repositorio:** https://github.com/LuisEDenegri/TPI-Prgramacion4-LuisDenegri
 
-**Video de demostración:** _(pendiente: pegar acá el link público)_
+**Video de demostración:** https://1drv.ms/v/c/80f220cd7e2a6239/IQCVRvvzakV0T5FW--EhaR_yAUGp1thEytKxS5VJK8iuAvM?e=VquMQq
 
 Son dos proyectos independientes que se comunican por HTTP:
 
@@ -39,6 +39,8 @@ docker compose up -d
 
 Levanta PostgreSQL 16 en el puerto 5432 con la base `foodstore_db` y el usuario `foodstore`
 (contraseña `foodstore`). Los datos quedan en un volumen, así que sobreviven a `docker compose down`.
+Si ya hay un PostgreSQL instalado escuchando en el 5432, el contenedor no puede tomar ese puerto:
+o se frena el servicio local, o se usa ese PostgreSQL como se explica abajo.
 
 Si preferís un PostgreSQL ya instalado, creá la base a mano y ajustá `DATABASE_URL` en el paso
 siguiente:
@@ -90,7 +92,8 @@ local). Después:
 pnpm dev
 ```
 
-La aplicación queda en `http://localhost:5173`. `pnpm build` compila y verifica los tipos.
+La aplicación queda en `http://localhost:5173` (también anda en `http://127.0.0.1:5173`).
+`pnpm build` compila y verifica los tipos.
 
 ## Usuarios del seed
 
@@ -104,6 +107,18 @@ que todavía no está. Crea estos usuarios, cuatro categorías y ocho productos 
 
 Cualquiera puede registrarse desde `/register`; el registro público siempre crea usuarios con rol
 `user`. El `admin` sale únicamente del seed.
+
+### Datos de demostración (opcional)
+
+```bash
+python -m app.db.seed_demo           # seed base + clientes y pedidos de prueba
+python -m app.db.seed_demo --reset   # borra toda la base y la vuelve a cargar
+```
+
+Corre el seed base y agrega los clientes `maria` y `juan` (contraseña `Demo1234!`) con siete pedidos
+en los cuatro estados, así el resumen y el listado del admin no arrancan vacíos. Es idempotente y va
+aparte del seed base porque `check_api.py` usa ese seed y cuenta pedidos. `--reset` borra todo lo
+que haya en la base.
 
 ## Variables de entorno
 
@@ -121,7 +136,7 @@ Cualquiera puede registrarse desde `/register`; el registro público siempre cre
 
 | Variable | Descripción | Ejemplo |
 |---|---|---|
-| `VITE_API_URL` | URL base de la API, con el prefijo `/api/v1` | `http://localhost:8000/api/v1` |
+| `VITE_API_URL` | URL base de la API, con el prefijo `/api/v1` | `http://127.0.0.1:8000/api/v1` |
 
 Ninguno de los dos `.env` se versiona. Los `.env.example` sí, y están completos.
 
